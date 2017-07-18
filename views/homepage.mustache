@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hangman Game!</title>
+  </head>
+  <body>
+    <h1>Hangman!</h1>
+    <h2>you have {{count}} guess left</h2>
+    {{#solution}}
+    <h3>The correct answer is {{solution}}!</h3>
+    {{/solution}}
+
+    {{^array_display}}
+    <h3>Guess me !  {{arrayDisplay}}</h3>
+    {{/array_display}}
+
+    {{#message}}
+    {{message}}
+    {{/message}}
+    {{^result_message}}
+    <form class="guess" action="/game" method="post">
+      <label for="">Enter a Letter!</label>
+      <input type="text" name="guess" value="">
+      <input type="submit" name="" value="Submit!">
+    </form>
+    {{/result_message}}
+    {{#result_message}}
+    <h1>{{result_message}}</h1>
+    <a href="/">Play again?!</a>
+    {{/result_message}}
+    {{#guessedArrayDisplay}}
+    <h4>letters guessed: {{guessedArrayDisplay}}</h4>
+    {{/guessedArrayDisplay}}
+  </body>
+</html>
