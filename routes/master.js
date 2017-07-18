@@ -16,30 +16,41 @@ router.use(expressValidator())
 
 
 let word;
-let blankArray=[]
+let blankArray=[];
 let count;
-let guessedArray=[]
-let message =""
-let solution =""
-let result_message =""
-let array_display
-let guessedArrayDisplay =[]
+let guessedArray=[];
+let message ="";
+let solution ="";
+let result_message ="";
+let array_display;
+let guessedArrayDisplay =[];
+let game;
 
 router.get('/',function(req, res){
+  game = true;
   result_message= ""
   count = 8
   guessedArray = []
   array_display = false;
   guessedArrayDisplay = []
-  word = Word.createNewWord()
+  // word = Word.createNewWord()
+  // wordArray = Word.blankArray(word)
+  res.render("homepage",{
+    game: true
+  })
+})
+router.post('/',function(req,res){
+  let difficulty = req.body.difficulty;
+  word = Word.createNewWord(difficulty)
   wordArray = Word.blankArray(word)
-  res.redirect("/game")
+  res.redirect('/game')
 })
 
 router.get('/game',function(req,res){
   guessedArrayDisplay =guessedArray.join(', ')
   arrayDisplay = wordArray.join(' ')
   res.render("homepage",{
+    game: false,
     solution: solution,
     arrayDisplay: arrayDisplay,
     count: count,
